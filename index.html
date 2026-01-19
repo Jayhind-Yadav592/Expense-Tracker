@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1>💰 Expense Tracker</h1>
+                <p>Manage your finances wisely</p>
+            </div>
+            <div class="currency-display">
+                <div class="label">Currency</div>
+                <div class="value" id="currencyDisplay">$ USD</div>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="card card-income">
+                <div class="card-header">
+                    <span>Total Income</span>
+                    <span>📈</span>
+                </div>
+                <div class="card-value" id="totalIncome">$0.00</div>
+            </div>
+            <div class="card card-expense">
+                <div class="card-header">
+                    <span>Total Expenses</span>
+                    <span>📉</span>
+                </div>
+                <div class="card-value" id="totalExpense">$0.00</div>
+            </div>
+            <div class="card card-balance" id="balanceCard">
+                <div class="card-header">
+                    <span>Balance</span>
+                    <span>💵</span>
+                </div>
+                <div class="card-value" id="balance">$0.00</div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showView('dashboard')">Dashboard</button>
+            <button class="nav-btn" onclick="showView('add')">Add Transaction</button>
+            <button class="nav-btn" onclick="showView('history')">History</button>
+            <button class="nav-btn" onclick="showView('settings')">⚙️ Settings</button>
+        </div>
+
+        <!-- Add Transaction View -->
+        <div id="addView" class="content-section">
+            <div class="white-card">
+                <h2 class="section-title">Add Transaction</h2>
+                <div class="form-group">
+                    <label class="form-label">Type</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="type" value="expense" checked>
+                            Expense
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="type" value="income">
+                            Income
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <input type="text" class="form-input" id="description" placeholder="Enter description">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Amount (<span id="currencySymbol">$</span>)</label>
+                    <input type="number" step="0.01" class="form-input" id="amount" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="category">
+                        <option value="food">🍔 Food & Dining</option>
+                        <option value="transport">🚗 Transportation</option>
+                        <option value="shopping">🛍️ Shopping</option>
+                        <option value="entertainment">🎬 Entertainment</option>
+                        <option value="bills">📄 Bills & Utilities</option>
+                        <option value="health">⚕️ Healthcare</option>
+                        <option value="salary">💼 Salary</option>
+                        <option value="other">📦 Other</option>
+                    </select>
+                </div>
+                <button class="submit-btn" onclick="addTransaction()">
+                    ➕ Add Transaction
+                </button>
+            </div>
+        </div>
+
+        <!-- Dashboard View -->
+        <div id="dashboardView" class="content-section active">
+            <div class="dashboard-grid">
+                <div class="white-card">
+                    <h2 class="section-title">Expense by Category</h2>
+                    <div id="categoryChart"></div>
+                </div>
+                <div class="white-card">
+                    <h2 class="section-title">Monthly Summary</h2>
+                    <div id="monthlySummary"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History View -->
+        <div id="historyView" class="content-section">
+            <div class="white-card">
+                <h2 class="section-title">Transaction History</h2>
+                <div id="transactionList"></div>
+            </div>
+        </div>
+
+        <!-- Settings View -->
+        <div id="settingsView" class="content-section">
+            <div class="white-card">
+                <h2 class="section-title">Settings</h2>
+                <div class="form-group">
+                    <label class="form-label">Currency</label>
+                    <select class="form-select" id="currencySelect" onchange="changeCurrency()">
+                        <option value="USD">$ - US Dollar</option>
+                        <option value="EUR">€ - Euro</option>
+                        <option value="GBP">£ - British Pound</option>
+                        <option value="INR">₹ - Indian Rupee</option>
+                        <option value="JPY">¥ - Japanese Yen</option>
+                        <option value="CNY">¥ - Chinese Yuan</option>
+                        <option value="AUD">A$ - Australian Dollar</option>
+                        <option value="CAD">C$ - Canadian Dollar</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
